@@ -4,7 +4,7 @@ import { TotalBalanceBox } from '@/components/ui/TotalBalanceBox';
 import React from 'react'
 
 const Home = () => {
-    const loggedIn = { firstName : 'Soham'};
+    const loggedIn = { firstName : 'Soham', lastName: 'Mitra', email: 'soham.mitra7707@gmail.com'};
 
     
     return (
