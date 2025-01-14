@@ -78,9 +78,9 @@ export const formatDateTime = (dateString: Date) => {
 // }
 
 export function formatAmount(amount: number): string {
-  const formatter = new Intl.NumberFormat("en-IN", {
+  const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "INR",
+    currency: "USD",
     minimumFractionDigits: 2,
   });
   return formatter.format(amount);
@@ -218,8 +218,8 @@ export const authFormSchema = (type: string) => z.object({
   address1: type === 'sign-in' ? z.string().optional(): z.string().max(50),
   city: type === 'sign-in' ? z.string().optional(): z.string().max(50),
   state: type === 'sign-in' ? z.string().optional(): z.string().min(2),
-  pincode: type === 'sign-in' ? z.string().optional(): z.string().min(6).max(6),
+  postalCode: type === 'sign-in' ? z.string().optional(): z.string().min(5).max(6),
   dateOfBirth: type === 'sign-in' ? z.string().optional(): z.string().min(3),
-  cus_id: type === 'sign-in' ? z.string().optional(): z.string().min(6).max(6),
+  ssn: type === 'sign-in' ? z.string().optional(): z.string().min(3).max(6),
 
 });
