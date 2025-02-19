@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { BankTabItem } from './BankTabItem'
 import BankInfo from './BankInfo'
 import TransactionsTable from './TransactionsTable'
-import { Pagination } from './Pagination'
+//import { Pagination } from './Pagination'
 
 const RecentTransactions = ({
   accounts,
@@ -33,8 +33,10 @@ const RecentTransactions = ({
         </Link>
       </header>
 
-      <Tabs defaultValue={appwriteItemId} className="w-full">
-      <TabsList className="recent-transactions-tablist">
+      <Tabs defaultValue={appwriteItemId} 
+      className="w-full">
+        <TabsList 
+        className="recent-transactions-tablist">
           {accounts.map((account: Account) => (
             <TabsTrigger key={account.id} value={account.appwriteItemId}>
               <BankTabItem
@@ -61,11 +63,11 @@ const RecentTransactions = ({
             <TransactionsTable transactions={currentTransactions} />
             
 
-            {totalPages > 1 && (
+            {/* {totalPages > 1 && (
               <div className="my-4 w-full">
                 <Pagination totalPages={totalPages} page={page} />
               </div>
-            )}
+            )} */}
           </TabsContent>
         ))}
       </Tabs>

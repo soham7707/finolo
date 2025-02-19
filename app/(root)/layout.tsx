@@ -1,4 +1,3 @@
-
 import MobileNav from "@/components/ui/MobileNav";
 import Sidebar from "@/components/ui/Sidebar";
 import { getLoggedInUser } from "@/lib/actions/user.actions";

@@ -1,8 +1,8 @@
 import React from "react";
 import { FormField, FormControl, FormLabel, FormMessage } from "./form";
 import { Input } from "./input";
-import { Control, FieldPath, Form } from "react-hook-form";
-import { TypeOf, z } from "zod";  
+import { Control, FieldPath } from "react-hook-form";
+import { z } from "zod";  
 import { authFormSchema } from "@/lib/utils";
 
 const formSchema = authFormSchema('sign-up')
@@ -14,8 +14,7 @@ interface CustomInput{
   placeholder: string
 }
 
-const CustomInput = ({ control, name, label, placeholder} //passing as a prop
-  : CustomInput) => {
+const CustomInput = ({ control, name, label, placeholder}: CustomInput) => {
   return (
     <FormField
       control={control}
@@ -39,7 +38,7 @@ const CustomInput = ({ control, name, label, placeholder} //passing as a prop
         </div>
       )}
     />
-  );
-};
+  )
+}
 
-export default CustomInput;
+export default CustomInput

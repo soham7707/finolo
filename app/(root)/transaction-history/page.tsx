@@ -1,10 +1,11 @@
 import HeaderBox from '@/components/HeaderBox'
-import { Pagination } from '@/components/ui/Pagination';
-import TransactionsTable from '@/components/ui/TransactionsTable';
-import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
-import { getLoggedInUser } from '@/lib/actions/user.actions';
-import { formatAmount } from '@/lib/utils';
 import React from 'react'
+import { Pagination } from '@/components/Pagination'
+import TransactionsTable from '@/components/ui/TransactionsTable'
+import { getAccount, getAccounts } from '@/lib/actions/bank.actions'
+import { getLoggedInUser } from '@/lib/actions/user.actions'
+import { formatAmount } from '@/lib/utils'
+
 
 const TransactionHistory = async ({ searchParams: { id, page }}:SearchParamProps) => {
   const currentPage = Number(page as string) || 1;
