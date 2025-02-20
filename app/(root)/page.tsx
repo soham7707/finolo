@@ -5,25 +5,30 @@ import TotalBalanceBox from '@/components/ui/TotalBalanceBox';
 import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
 import { getLoggedInUser } from '@/lib/actions/user.actions';
 
-const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
-  const currentPage = Number(page as string) || 1;
+const Home = async ({ searchParams }: { searchParams: URLSearchParams }) => {
+  // Ensure proper async handling of searchParams
+  const params = new URLSearchParams(searchParams.toString());
+
+  const id = params.get("id") || "";
+  const currentPage = Number(params.get("page")) || 1;
+
   const loggedIn = await getLoggedInUser();
-  const accounts = await getAccounts({ 
-    userId: loggedIn.$id 
-  })
+  if (!loggedIn) return <p>User not found. Please log in.</p>;
 
-  // not getting accounts //
-  if(!accounts) return;
-  
-  const accountsData = accounts?.data;
-  const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
+  const accounts = await getAccounts({ userId: loggedIn.$id });
+  if (!accounts || !accounts.data?.length) return <p>No accounts found.</p>;
 
-  const account = await getAccount({ appwriteItemId })
+  const accountsData = accounts.data;
+  const appwriteItemId = id || accountsData[0]?.appwriteItemId || "";
 
-  // console.log({
-  //   accountsData,
-  //   account
-  // })
+  let account = null;
+  try {
+    if (appwriteItemId) {
+      account = await getAccount({ appwriteItemId });
+    }
+  } catch (error) {
+    console.error("Error fetching account:", error);
+  }
 
   return (
     <section className="home">
@@ -44,20 +49,20 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
         </header>
 
         <RecentTransactions 
-            accounts={accountsData}
-            transactions={account?.transactions}
-            appwriteItemId={appwriteItemId}
-            page={currentPage}
+          accounts={accountsData}
+          transactions={account?.transactions || []} 
+          appwriteItemId={appwriteItemId}
+          page={currentPage}
         />
       </div>
 
       <RightSidebar 
         user={loggedIn}
-        transactions={account?.transactions}
+        transactions={account?.transactions || []}
         banks={accountsData?.slice(0, 2)}
       />
     </section>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

@@ -27,6 +27,10 @@ const CategoryBadge = ({ category }: CategoryBadgeProps) => {
 } 
 
 const TransactionsTable = ({ transactions }: TransactionTableProps) => {
+  if (!transactions || !Array.isArray(transactions) || transactions.length === 0) {
+    return <p className="text-center text-gray-500">No Transactions Available</p>;
+  }
+
   return (
     <Table>
       <TableHeader className="bg-[#f9fafb]">

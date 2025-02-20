@@ -79,7 +79,7 @@ export const createTransfer = async ({
         },
       },
       amount: {
-        currency: "USD",
+        currency: "INR",
         value: amount,
       },
     };

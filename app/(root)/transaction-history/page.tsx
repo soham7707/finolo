@@ -7,8 +7,11 @@ import { getLoggedInUser } from '@/lib/actions/user.actions'
 import { formatAmount } from '@/lib/utils'
 
 
-const TransactionHistory = async ({ searchParams: { id, page }}:SearchParamProps) => {
-  const currentPage = Number(page as string) || 1;
+const TransactionHistory = async ({ searchParams }: SearchParamProps) => {
+  const params = await searchParams; // Await searchParams before accessing properties
+  const id = params?.id ?? "";
+  const currentPage = Number(params?.page) || 1;
+
   const loggedIn = await getLoggedInUser();
   const accounts = await getAccounts({ 
     userId: loggedIn.$id 
